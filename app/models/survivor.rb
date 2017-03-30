@@ -10,11 +10,22 @@ class Survivor < ApplicationRecord
 
 	has_many :contamination_reports, foreign_key: 'survivor_id', after_add: :flag_survivor_as_infected
 
-	 private
-
-	def flag_as_contaminated(contamination_report)
-	  if contamination_reports.count == REPORT_LIMIT
-	    update_attribute :infected, true
-	  end
+	def include_inventory
+	    inventories.includes(:item).inject({}) {|inventory_items, inventory|
+	      inventory_items[inventory.item.name] = inventory.quantity
+	      inventory_items
+	    }
 	end
+
+    def as_json(args = {})
+		super({ methods: :include_inventory }.merge(args))
+	end
+
+	private
+
+		def flag_as_contaminated(contamination_report)
+		  	if contamination_reports.count == REPORT_LIMIT
+		    	update_attribute :infected, true
+		  	end
+		end
 end
