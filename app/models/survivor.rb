@@ -10,6 +10,14 @@ class Survivor < ApplicationRecord
 
 	has_many :contamination_reports, foreign_key: 'survivor_id', after_add: :flag_survivor_as_infected
 
+	def transfer(destination_survivor, trade_inventory)
+		trade_inventory.each do |inventory|
+			mine_inventory = inventories.find_by(item: inventory.item)
+			mine_inventory.quantity - inventory.quantity == 0 ? mine_inventory.destroy : mine_inventory.decrement!(:quantity, inventory.quantity)
+			destination_survivor.inventories.find_or_create_by(item: inventory.item).increment!(:quantity, inventory.quantity)
+		end
+	end
+
 	def include_inventory
 	    inventories.includes(:item).inject({}) {|inventory_items, inventory|
 	      inventory_items[inventory.item.name] = inventory.quantity

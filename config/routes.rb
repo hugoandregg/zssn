@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   	resource :location, only: [:update]
   	resource :contamination_reports, only: [:create]
   end
+
+  resource :trade, only: [:create] 
 end
