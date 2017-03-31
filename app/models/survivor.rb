@@ -23,8 +23,8 @@ class Survivor < ApplicationRecord
 
 	private
 
-		def flag_as_contaminated(contamination_report)
-		  	if contamination_reports.count == REPORT_LIMIT
+		def flag_survivor_as_infected(contamination_report)
+		  	if (contamination_reports.count + 1) == REPORT_LIMIT
 		    	update_attribute :infected, true
 		  	end
 		end
