@@ -29,6 +29,10 @@ class Survivor < ApplicationRecord
 		super({ methods: :include_inventory }.merge(args))
 	end
 
+	def self.non_infected_count
+		Survivor.where(infected: false).count
+	end
+
 	private
 
 		def flag_survivor_as_infected(contamination_report)
