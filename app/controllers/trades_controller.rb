@@ -4,7 +4,7 @@ class TradesController < ApplicationController
 		if @trade.begin
 			json_response(@trade, :created)
 		else
-			json_response(@survivor, :unprocessable_entity)
+			json_response(@trade, :unprocessable_entity)
 		end
 	end
 

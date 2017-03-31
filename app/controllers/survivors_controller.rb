@@ -20,7 +20,6 @@ class SurvivorsController < ApplicationController
 
 	private
 		def survivor_params
-			params.require(:survivor).permit(:name, :age, :gender, :latitude, 
-				:longitude, inventory: [:name, :quantity])
+			params.require(:survivor).permit(:name, :age, :gender, :latitude, :longitude, inventory: [:name, :quantity])
 		end
 end

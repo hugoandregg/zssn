@@ -13,14 +13,14 @@ $ bundle install
 $ rake db:setup
 $ rails s
 ```
-With you want to run the tests, just run the following command:
+If you want to run the tests, just run the following command:
 
 ```
 $ bundle exec rspec
 ```
 
 ## Operations
-*To do these operations like in the examples, you have to use [HTTPie](https://httpie.org/) and have to run the server at the same time (rails s).*
+*To do these operations like in the examples, you have to use [HTTPie](https://httpie.org/) and have to run the server at the same time, by using the "rails s" command.*
 
 ### List survivors
 - **URL**

@@ -1,7 +1,7 @@
 class Survivor < ApplicationRecord
 	REPORT_LIMIT = 3
 
-	validates :name, :age, :gender, :latitude, :longitude, presence: true
+	validates :name, :age, :gender, :latitude, :longitude, :infected, presence: true
 	validates :gender, inclusion: { in: %w{male female} }
 	validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
