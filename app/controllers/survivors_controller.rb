@@ -6,9 +6,11 @@ class SurvivorsController < ApplicationController
 
 	def create
 		@survivor = Survivor.create(survivor_params.except(:inventory))
+		
 		survivor_params[:inventory].each do |inventory|
 			@survivor.inventories.build({:item_id => Item.find_by(name: inventory[:name]).id, :quantity => inventory[:quantity]})
 		end
+		
 		if @survivor.save
 			json_response(@survivor, :created)
 		else
